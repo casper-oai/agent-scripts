@@ -1,14 +1,40 @@
 #!/usr/bin/env tsx
+// @ts-nocheck
 
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const docsListFile = fileURLToPath(import.meta.url);
 const docsListDir = dirname(docsListFile);
-const DOCS_DIR = join(docsListDir, '..', 'docs');
 
 const EXCLUDED_DIRS = new Set(['archive', 'research']);
+
+function resolveDocsDir(): string {
+  const argv = process.argv.slice(2);
+  const argIndex = argv.indexOf('--docs-dir');
+  if (argIndex !== -1) {
+    const value = argv[argIndex + 1];
+    if (!value || value.startsWith('-')) {
+      console.error('error: --docs-dir requires a path\n');
+      console.error('usage: docs-list.ts [--docs-dir <path>]');
+      process.exit(2);
+    }
+    return join(process.cwd(), value);
+  }
+
+  const envDocsDir = process.env.DOCS_DIR?.trim();
+  if (envDocsDir) {
+    return join(process.cwd(), envDocsDir);
+  }
+
+  const cwdDocs = join(process.cwd(), 'docs');
+  if (existsSync(cwdDocs)) {
+    return cwdDocs;
+  }
+
+  return join(docsListDir, '..', 'docs');
+}
 
 function compactStrings(values: unknown[]): string[] {
   const result: string[] = [];
@@ -122,7 +148,9 @@ function extractMetadata(fullPath: string): {
   return { summary: normalized, readWhen };
 }
 
-console.log('Listing all markdown files in docs folder:');
+const DOCS_DIR = resolveDocsDir();
+
+console.log(`Listing all markdown files in docs folder: ${DOCS_DIR}`);
 
 const markdownFiles = walkMarkdownFiles(DOCS_DIR);
 
