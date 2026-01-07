@@ -73,6 +73,9 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 
 Read `~/work/agent-scripts/tools.md` for the full tool catalog if it exists.
 
+### Context7 MCP
+- Provides up-to-date documentation on libraries. Use before using a library that's rapidly evolving.
+
 ### committer
 - Commit helper (PATH). Stages only listed paths; required here. Repo may also ship `./scripts/committer`.
 
