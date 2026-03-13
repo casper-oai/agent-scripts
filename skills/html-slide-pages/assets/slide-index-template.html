@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deck Topic Summary</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --panel: #ffffff;
+      --text: #111827;
+      --muted: #667085;
+      --line: #d0d5dd;
+      --accent: #175cd3;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2f6 100%);
+      color: var(--text);
+    }
+
+    .page {
+      width: min(1280px, calc(100vw - 48px));
+      margin: 0 auto;
+      padding: 32px 24px 48px;
+    }
+
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 18px 50px rgba(16, 24, 40, 0.06);
+      padding: 28px 30px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 38px;
+      line-height: 1.08;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 860px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .agenda {
+      margin: 24px 0 0;
+      padding-left: 26px;
+    }
+
+    .agenda li + li {
+      margin-top: 14px;
+    }
+
+    .agenda a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .agenda a:hover {
+      color: var(--accent);
+    }
+
+    .agenda-note {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Short summary of the deck</h1>
+      <p>What the slides cover, in one or two short sentences.</p>
+
+      <ol class="agenda">
+        <li>
+          <a href="./bundle/slide-01-topic.html">Slide 1: Topic</a>
+          <span class="agenda-note">What this slide covers.</span>
+        </li>
+        <li>
+          <a href="./bundle/slide-02-example.html">Slide 2: Example</a>
+          <span class="agenda-note">Concrete worked example.</span>
+        </li>
+      </ol>
+    </section>
+  </div>
+</body>
+</html>

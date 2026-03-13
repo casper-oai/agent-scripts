@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Visual Page</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --panel: #ffffff;
+      --text: #111827;
+      --muted: #667085;
+      --line: #d0d5dd;
+      --accent: #175cd3;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2f6 100%);
+      color: var(--text);
+    }
+
+    [contenteditable="true"] {
+      outline: none;
+      cursor: text;
+    }
+
+    [contenteditable="true"]:focus {
+      box-shadow: inset 0 0 0 2px rgba(23, 92, 211, 0.18);
+      border-radius: 12px;
+    }
+
+    .page {
+      width: min(1480px, calc(100vw - 48px));
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 32px 24px 48px;
+    }
+
+    .hero,
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 18px 50px rgba(16, 24, 40, 0.06);
+    }
+
+    .hero {
+      padding: 24px 28px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 40px;
+      line-height: 1.05;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 900px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      padding: 20px;
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .pre-line {
+      white-space: pre-line;
+    }
+
+    .fullscreen-toggle {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1000;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(17, 24, 39, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+      box-shadow: 0 12px 30px rgba(16, 24, 40, 0.12);
+      cursor: pointer;
+    }
+
+    .fullscreen-toggle:hover {
+      background: rgba(255, 255, 255, 1);
+    }
+
+    .slide-nav-button {
+      position: fixed;
+      bottom: 18px;
+      z-index: 999;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(17, 24, 39, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--text);
+      box-shadow: 0 12px 30px rgba(16, 24, 40, 0.12);
+      cursor: pointer;
+    }
+
+    .slide-nav-button--prev {
+      left: calc(50% - 44px);
+    }
+
+    .slide-nav-button--next {
+      left: calc(50% + 4px);
+    }
+
+    .slide-nav-button:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        padding: 20px 12px 32px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero,
+      .card {
+        border-radius: 18px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="fullscreen-toggle" type="button" aria-label="Enter fullscreen" title="Enter fullscreen">&#x26F6;</button>
+  <button class="slide-nav-button slide-nav-button--prev" type="button" aria-label="Previous slide" title="Previous slide">&#x2039;</button>
+  <button class="slide-nav-button slide-nav-button--next" type="button" aria-label="Next slide" title="Next slide">&#x203A;</button>
+  <div class="page">
+    <section class="hero">
+      <h1 contenteditable="true">Page Title</h1>
+      <p contenteditable="true">One clear visual message. Keep the subtitle short and useful.</p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2 contenteditable="true">Block One</h2>
+        <p contenteditable="true">Use compact copy and intentional spacing.</p>
+      </article>
+
+      <article class="card">
+        <h2 contenteditable="true">Block Two</h2>
+        <p class="pre-line" contenteditable="true">Use real line breaks
+when you want stacked text.</p>
+      </article>
+
+      <article class="card">
+        <h2 contenteditable="true">Block Three</h2>
+        <p contenteditable="true">Replace this starter content with the actual visual story.</p>
+      </article>
+    </section>
+  </div>
+  <script>
+    window.htmlSlideConfig = {
+      previousSlideUrl: "",
+      nextSlideUrl: ""
+    };
+
+    (function () {
+      const config = window.htmlSlideConfig || {};
+      const previousSlideUrl =
+        typeof config.previousSlideUrl === "string" ? config.previousSlideUrl.trim() : "";
+      const nextSlideUrl = typeof config.nextSlideUrl === "string" ? config.nextSlideUrl.trim() : "";
+      const fullscreenButton = document.querySelector(".fullscreen-toggle");
+      const previousButton = document.querySelector(".slide-nav-button--prev");
+      const nextButton = document.querySelector(".slide-nav-button--next");
+
+      function updatePresentationControls() {
+        const isFullscreen = Boolean(document.fullscreenElement);
+        fullscreenButton.setAttribute("aria-label", isFullscreen ? "Exit fullscreen" : "Enter fullscreen");
+        fullscreenButton.title = isFullscreen ? "Exit fullscreen" : "Enter fullscreen";
+        previousButton.disabled = !previousSlideUrl;
+        nextButton.disabled = !nextSlideUrl;
+      }
+
+      async function toggleFullscreen() {
+        try {
+          if (document.fullscreenElement) {
+            await document.exitFullscreen();
+          } else {
+            await document.documentElement.requestFullscreen();
+          }
+        } catch (_error) {
+          // Ignore fullscreen failures and leave the slide usable.
+        }
+      }
+
+      function navigateTo(url) {
+        if (!url) return;
+        window.location.href = url;
+      }
+
+      function hasEditingFocus() {
+        const activeElement = document.activeElement;
+        return Boolean(
+          activeElement &&
+            (activeElement.isContentEditable ||
+              /^(INPUT|TEXTAREA|SELECT)$/i.test(activeElement.tagName || ""))
+        );
+      }
+
+      fullscreenButton.addEventListener("click", function (event) {
+        event.stopPropagation();
+        toggleFullscreen();
+      });
+
+      previousButton.addEventListener("click", function (event) {
+        event.stopPropagation();
+        navigateTo(previousSlideUrl);
+      });
+
+      nextButton.addEventListener("click", function (event) {
+        event.stopPropagation();
+        navigateTo(nextSlideUrl);
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (!document.fullscreenElement) return;
+        if (hasEditingFocus()) return;
+        if (event.key === "ArrowLeft" || event.key === "PageUp") {
+          event.preventDefault();
+          navigateTo(previousSlideUrl);
+        }
+        if (event.key === "ArrowRight" || event.key === " " || event.key === "PageDown") {
+          event.preventDefault();
+          navigateTo(nextSlideUrl);
+        }
+      });
+
+      document.addEventListener("fullscreenchange", updatePresentationControls);
+      updatePresentationControls();
+    })();
+  </script>
+</body>
+</html>

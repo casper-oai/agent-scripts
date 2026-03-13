@@ -1,0 +1,4 @@
+interface:
+  display_name: "HTML Slide Pages"
+  short_description: "Build editable browser-first slide pages"
+  default_prompt: "Use $html-slide-pages to build an editable HTML slide page instead of a PPTX slide."

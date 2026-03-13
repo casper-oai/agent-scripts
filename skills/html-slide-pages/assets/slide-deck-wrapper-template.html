@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deck Summary and Slide Wrapper</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f6f8;
+      --panel: #ffffff;
+      --text: #111827;
+      --muted: #667085;
+      --line: #d0d5dd;
+      --accent: #175cd3;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2f6 100%);
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 32px 24px 48px;
+    }
+
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 18px 50px rgba(16, 24, 40, 0.06);
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+      max-width: 920px;
+    }
+
+    .agenda {
+      margin: 22px 0 0;
+      padding-left: 24px;
+    }
+
+    .agenda li + li {
+      margin-top: 12px;
+    }
+
+    .agenda a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .agenda a:hover {
+      color: var(--accent);
+    }
+
+    .agenda-note {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .section-head span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 940px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--panel);
+      box-shadow: 0 18px 50px rgba(16, 24, 40, 0.06);
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        padding: 20px 12px 32px;
+      }
+
+      .hero {
+        padding: 18px;
+        border-radius: 18px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      iframe {
+        height: 760px;
+        border-radius: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Short summary of what the deck covers</h1>
+      <p>One or two short sentences describing the subject matter of the slides, not the fact that this is an HTML deck.</p>
+
+      <ol class="agenda">
+        <li>
+          <a href="./bundle/slide-01-topic.html">Slide 1: Topic</a>
+          <span class="agenda-note">What this slide covers.</span>
+        </li>
+        <li>
+          <a href="./bundle/slide-02-example.html">Slide 2: Example</a>
+          <span class="agenda-note">Concrete worked example.</span>
+        </li>
+        <li>
+          <a href="./bundle/slide-03-detail.html">Slide 3: Detail</a>
+          <span class="agenda-note">More specific workflow, example, or recommendation.</span>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Duplicate or delete section blocks as needed to match the agenda above. -->
+    <section class="section">
+      <div class="section-head">
+        <h2>Slide 1: Topic</h2>
+        <span>One-line summary of the slide</span>
+      </div>
+      <iframe src="./bundle/slide-01-topic.html" title="Slide 1 preview" allowfullscreen></iframe>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Slide 2: Example</h2>
+        <span>One-line summary of the slide</span>
+      </div>
+      <iframe src="./bundle/slide-02-example.html" title="Slide 2 preview" allowfullscreen></iframe>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Slide 3: Detail</h2>
+        <span>One-line summary of the slide</span>
+      </div>
+      <iframe src="./bundle/slide-03-detail.html" title="Slide 3 preview" allowfullscreen></iframe>
+    </section>
+  </div>
+</body>
+</html>
